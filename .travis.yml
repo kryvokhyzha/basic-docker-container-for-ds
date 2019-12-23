@@ -2,4 +2,4 @@ sudo: required
 services:
     - docker
 script:
-    - test “$TRAVIS_BRANCH” = “master” && test "$TRAVIS_PULL_REQUEST" = "false" && sh .travis/dockerHub_deploy.sh
+    - sh .travis/dockerHub_deploy.sh
