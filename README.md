@@ -74,6 +74,22 @@ services:
 ```
 
 # Usefull commnads
+
+### Show running containers
+```
+docker ps
+```
+
+### Show all containers
+```
+docker ps --all
+```
+
+### Show all top level images
+```
+docker images
+```
+
 ### Build container
 ```
 docker -t build <tag-name> .
