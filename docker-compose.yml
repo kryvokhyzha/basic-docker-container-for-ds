@@ -1,0 +1,22 @@
+version: '3'
+services: 
+    jupyter:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        volumes: 
+            - ./src/:/home/jovyan/work
+        ports: 
+            - "8888:8888"
+        environment: 
+            - JUPYTER_ENABLE_LAB=yes
+
+    db:
+        image: postgres
+        restart: always
+        volumes: 
+            - pgdata:/var/lib/postgresql/data
+        ports: 
+            - "5432:5432"
+volumes: 
+    pgdata:
