@@ -4,6 +4,7 @@ services:
         build: 
             context: ./docker/jupyter/
             dockerfile: Dockerfile
+        image: kryvokhyzha/basic-docker-container-for-ds:latest
         volumes: 
             - .:/home/jovyan/
         ports: 
