@@ -108,3 +108,9 @@ venv.bak/
 db.txt
 
 .idea
+
+# Jupyter Lab and docker files
+.ipython
+.jupyter
+.local
+.config

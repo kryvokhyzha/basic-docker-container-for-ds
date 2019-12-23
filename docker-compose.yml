@@ -2,18 +2,17 @@ version: '3'
 services: 
     jupyter:
         build: 
-            context: .
+            context: ./docker/jupyter/
             dockerfile: Dockerfile
         volumes: 
-            - ./src/:/home/jovyan/work
+            - .:/home/jovyan/
         ports: 
             - "8888:8888"
         environment: 
             - JUPYTER_ENABLE_LAB=yes
 
     db:
-        image: postgres
-        restart: always
+        image: postgres:10
         volumes: 
             - pgdata:/var/lib/postgresql/data
         ports: 
