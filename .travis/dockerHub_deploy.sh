@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "Start"
-if [ "$TRAVIS_BRANCH" = "master" ] && ["$TRAVIS_PULL_REQUEST" = "false"]; then
+if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     echo "In if"
     TAG="latest"
     echo "After TAG"
