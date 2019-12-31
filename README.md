@@ -15,7 +15,14 @@ statsmodels
 torch==1.3
 ```
 
-3. Run containers:
+3. Change image name in docker-compose file:
+```
+...
+    image: docker_user/app_name:tag
+...
+```
+
+4. Run containers:
 
 ```
 docker-compose up
@@ -25,21 +32,21 @@ or
 docker-compose up --build
 ```
 
-4. Copy a jupyter url from terminal and open it in your browser
+5. Copy a jupyter url from terminal and open it in your browser
 
-5. Create your notebook in _notebooks_ folder
+6. Create your notebook in _notebooks_ folder
 
-6. Copy your data into ./data and read it in Jupyter. You also can upload data into PostgresSQL, which is running in it's own container along with Jupyter
+7. Copy your data into ./data and read it in Jupyter. You also can upload data into PostgresSQL, which is running in it's own container along with Jupyter
 
-7. Close terminal to stop running jupyter and postgres
+8. Close terminal to stop running jupyter and postgres
 
-8. Stop containers and removes containers, networks, volumes, and images:
+9. Stop containers and removes containers, networks, volumes, and images:
 
 ```
 docker-compose down
 ```
 
-9. Clean Docker's mess:
+10. Clean Docker's mess:
 
 ```
 docker rmi -f $(docker images -qf dangling=true)
