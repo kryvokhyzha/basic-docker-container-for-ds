@@ -63,6 +63,8 @@
 # seaborn
 # plotly
 # yellowbrick
+# ggplot
+# bokeh
 #
 #  --------------------------------
 
@@ -71,6 +73,7 @@
 # ----- For Graph -----
 #
 # graphviz
+# networkx
 #
 #  --------------------------------
 
