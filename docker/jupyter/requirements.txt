@@ -1,6 +1,6 @@
 # ----- Utiles -----
 #
-# tqdm
+tqdm
 #
 # --------------------------------
 
@@ -66,10 +66,10 @@
 
 # ----- For Visualization -----
 #
-# matplotlib
-# seaborn
-# plotly
-# yellowbrick
+matplotlib
+seaborn
+plotly
+yellowbrick
 # ggplot
 # bokeh
 #
@@ -79,7 +79,7 @@
 
 # ----- For Graph -----
 #
-# graphviz
+graphviz
 # networkx
 #
 #  --------------------------------
@@ -101,12 +101,12 @@
 
 # ----- For ML -----
 #
-# numpy
-# pandas
+numpy
+pandas
 # imblearn
-# scikit-learn
-# scipy
-# statsmodels
+scikit-learn
+scipy
+statsmodels
 # fbprophet
 # pystan
 # 
