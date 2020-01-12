@@ -35,4 +35,25 @@ def get_description(df: pandas.DataFrame, id_cols='id'):
     figure = go.Figure(data=[trace],layout=layout)
     py.iplot(figure)
 
-    
+def percentile_based_outlier(df, threshold=95):
+    diff = (100 - threshold) / 2
+    minval, maxval = numpy.percentile(df, [diff, 100 - diff])
+    return (df < minval) | (df > maxval)
+
+def have_null(df):
+    """
+        If this function returns true then there are null values in the data frame and false means there are none
+    """
+    return df.isnull().values.any()
+
+def number_of_missing_values(df):
+    """
+        This function returns the total number of missing values across different columns
+    """
+    return df.isnull().sum()
+
+def IQR(df):
+    """
+        IQR = Q3 −  Q1
+    """
+    return df.quantile(0.75) - df.quantile(0.25)

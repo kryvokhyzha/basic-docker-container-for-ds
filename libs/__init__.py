@@ -8,6 +8,7 @@ import plotly.tools as tls
 import plotly.figure_factory as ff
 
 from matplotlib.pyplot import cm
+import matplotlib.pyplot as plt
 
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
@@ -19,3 +20,4 @@ import statsmodels.api as sm
 from sklearn.metrics import precision_score,recall_score
 from yellowbrick.classifier import DiscriminationThreshold
 from sklearn.metrics import cohen_kappa_score
+import seaborn as sns

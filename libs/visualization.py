@@ -259,3 +259,38 @@ def plot_radar(df, aggregate, target_col, title=''):
     data = [trace2, trace1]
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
+
+
+def corr_sns_heatmap(corr, annot=True, cmap='viridis', vmax=1.0, vmin=-1.0, linewidths=0.1):
+    sns.heatmap(corr[(corr >= 0.5) | (corr <= -0.4)], 
+                cmap=cmap, vmax=vmax, vmin=vmin, linewidths=linewidths,
+                annot=annot, annot_kws={"size": 8}, square=True)
+
+def __autolabel(arrayA):
+    """
+        Label each colored square with the corresponding data value. 
+        If value > 20, the text is in black, else in white.
+    """
+    arrayA = numpy.array(arrayA)
+    for i in range(arrayA.shape[0]):
+        for j in range(arrayA.shape[1]):
+                plt.text(j,i, "%.2f"%arrayA[i,j], ha='center', va='bottom',color='w')
+
+def gt_matrix(df, num_cols, sz=16):
+    a = []
+    for i, c1 in enumerate(num_cols):
+        b = [] 
+        for j, c2 in enumerate(num_cols):
+            mask = (~df[c1].isnull()) & (~df[c2].isnull())
+            if i >= j:
+                b.append((df.loc[mask,c1].values >= df.loc[mask, c2].values).mean())
+            else:
+                b.append((df.loc[mask, c1].values > df.loc[mask, c2].values).mean())
+
+        a.append(b)
+
+    plt.figure(figsize = (sz,sz))
+    plt.imshow(a, interpolation = 'None')
+    _ = plt.xticks(range(len(num_cols)),num_cols,rotation = 90)
+    _ = plt.yticks(range(len(num_cols)),num_cols,rotation = 0)
+    __autolabel(a)
