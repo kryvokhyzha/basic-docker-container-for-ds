@@ -13,7 +13,9 @@ services:
             - JUPYTER_ENABLE_LAB=yes
 
     db:
-        image: postgres:10
+        build:
+            context: ./docker/postgres
+            dockerfile: Dockerfile
         volumes: 
             - pgdata:/var/lib/postgresql/data
         ports: 

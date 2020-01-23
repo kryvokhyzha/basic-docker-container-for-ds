@@ -1,4 +1,4 @@
-FROM jupyter/datascience-notebook:latest
+FROM jupyter/pyspark-notebook:latest
 
 COPY requirements.txt requirements.txt
 

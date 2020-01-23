@@ -101,11 +101,11 @@ graphviz
 
 # ----- For ML -----
 #
-numpy
+numpy>=1.11
 pandas
-# imblearn
-scikit-learn
-scipy
+imblearn
+scikit-learn>=0.22
+scipy>=0.17
 statsmodels
 # fbprophet
 # pystan

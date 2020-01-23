@@ -3,3 +3,7 @@
 
 # Documentation
 README.md
+
+# Docker files
+docker-compose.yml
+docker/
