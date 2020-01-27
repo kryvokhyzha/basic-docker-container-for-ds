@@ -1,7 +1,7 @@
 from libs import *
 
 
-def get_prediction(algorithm, X_train, X_test, y_train, y_test, cols, cf, threshold_plot=True):
+def get_prediction(algorithm, X_train, X_test, y_train, y_test, cols, cf, threshold_plot=True) -> None:
     """
         Algorithm       - Algorithm used 
         cf              - ["coefficients","features"](`cooefficients` for logistic regression, `features` for tree based models)
@@ -89,7 +89,7 @@ def get_prediction(algorithm, X_train, X_test, y_train, y_test, cols, cf, thresh
         visualizer.poof()
 
 
-def model_report(model, X_train, X_test, y_train, y_test, name) :
+def model_report(model, X_train, X_test, y_train, y_test, name) -> None:
     """
         Usage example:
             model1 = model_report(lg, X_train, X_test, y_train, y_test, "lg")
@@ -121,7 +121,7 @@ def model_report(model, X_train, X_test, y_train, y_test, name) :
     return df
 
 
-def error_metrics(y_true, y_preds, n, k):
+def error_metrics(y_true, y_preds, n, k) -> None:
     """
         1. Take y_true, y_preds, n, k.
             n is the number of observations.

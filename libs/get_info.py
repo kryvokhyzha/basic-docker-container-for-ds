@@ -127,7 +127,7 @@ def histograms_numeric_columns(df: pd.DataFrame, numerical_columns: list) -> Non
     return g
 
 
-def boxplots_categorical_columns(df: pd.DataFrame, categorical_columns: list, dependant_variable: str):
+def boxplots_categorical_columns(df: pd.DataFrame, categorical_columns: list, dependant_variable: str) -> None:
     """
         1. Take df, a list of categorical columns, a dependant variable as str.
         2. Return group boxplots of correlations between categorical varibles and dependant variable.
@@ -142,7 +142,7 @@ def boxplots_categorical_columns(df: pd.DataFrame, categorical_columns: list, de
     return g
 
 
-def heatmap_numeric_w_dependent_variable(df: pd.DataFrame, dependent_variable: str):
+def heatmap_numeric_w_dependent_variable(df: pd.DataFrame, dependent_variable: str) -> None:
     """
         Generate a heatmap of dependent variable's correlation with y
     """
@@ -155,7 +155,7 @@ def heatmap_numeric_w_dependent_variable(df: pd.DataFrame, dependent_variable: s
     return g
 
 
-def high_corr_w_dependent_variable(df: pd.DataFrame, dependent_variable: str, corr_value: float):
+def high_corr_w_dependent_variable(df: pd.DataFrame, dependent_variable: str, corr_value: float) -> None:
     """
         Get a dataframe of independant varibles that are highly (e.g. abs(corr) > 0.4) with dependent varible
     """
@@ -164,7 +164,7 @@ def high_corr_w_dependent_variable(df: pd.DataFrame, dependent_variable: str, co
     return temp_df.loc[mask_1]
 
 
-def high_corr_among_independent_variable(df: pd.DataFrame, dependent_variable: str, corr_value: float):
+def high_corr_among_independent_variable(df: pd.DataFrame, dependent_variable: str, corr_value: float) -> None:
     """
         1. Check correlation among independant varibles.
         2. To see which two features have strong corr with each ohter.
@@ -178,7 +178,7 @@ def high_corr_among_independent_variable(df: pd.DataFrame, dependent_variable: s
     return {k:v for k, v in temp_dict.items() if v}
 
 
-def categorical_to_ordinal_transformer(categories: list):
+def categorical_to_ordinal_transformer(categories: list) -> None:
     """
     Returns a function that will map categories to ordinal values based on the
     order of the list of `categories` given.
@@ -190,7 +190,7 @@ def categorical_to_ordinal_transformer(categories: list):
     return lambda categorical_value: categories.index(categorical_value)
 
 
-def transform_categorical_to_numercial(df: pd.DataFrame, categorical_numerical_mapping):
+def transform_categorical_to_numercial(df: pd.DataFrame, categorical_numerical_mapping) -> None:
     """
         1. Transform categorical columns to numerical columns
         2. Take a df, a dictionary 
@@ -204,7 +204,7 @@ def transform_categorical_to_numercial(df: pd.DataFrame, categorical_numerical_m
     return new_df
 
 
-def dummify_categorical_columns(df: pd.DataFrame):
+def dummify_categorical_columns(df: pd.DataFrame) -> None:
     """
         Dummify all categorical columns
     """
@@ -212,7 +212,7 @@ def dummify_categorical_columns(df: pd.DataFrame):
     return pd.get_dummies(df, columns=categorical_columns, drop_first=True)
 
 
-def conform_columns(df_reference: pd.DataFrame, df: pd.DataFrame):
+def conform_columns(df_reference: pd.DataFrame, df: pd.DataFrame) -> None:
     """
         Drop columns in df that are not in df_reference
     """
@@ -222,7 +222,7 @@ def conform_columns(df_reference: pd.DataFrame, df: pd.DataFrame):
 
 import statsmodels.api as sm
 from io import StringIO
-def extract_individual_summary_table_statsmodel(X, y, table_number):
+def extract_individual_summary_table_statsmodel(X, y, table_number) -> None:
     """
         Extract individual summary table from statsmodel.summary
 

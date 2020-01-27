@@ -1,8 +1,8 @@
 from libs import *
 
 
-def scatter_3d(df: pd.DataFrame, x_col, y_col, z_col,
-                traces, title=''):
+def scatter_3d(df: pd.DataFrame, x_col: str, y_col: str, z_col: str,
+                traces: dict, title='') -> None:
     """
         Usage Example:
             scatter_3d(telcom, 'col1', 'col2', 'col3',
@@ -55,7 +55,8 @@ def scatter_3d(df: pd.DataFrame, x_col, y_col, z_col,
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def corr_heatmap(df, method='pearson', min_periods=1, colorscale="Viridis", abs=False):
+
+def corr_heatmap(df: pd.DataFrame, method='pearson', min_periods=1, colorscale="Viridis", abs=False) -> None:
     """
         Usage Example:
             corr_heatmap(df, abs=True)
@@ -96,7 +97,8 @@ def corr_heatmap(df, method='pearson', min_periods=1, colorscale="Viridis", abs=
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def __make_scatter_2d(data, target_col, id_col, target, color):
+
+def __make_scatter_2d(data: pd.DataFrame, target_col: str, id_col: str, target, color) -> None:
     tracer = go.Scatter(x=data[data[target_col] == target]["PC1"],
                         y=data[data[target_col] == target]["PC2"],
                         name=target,
@@ -108,7 +110,8 @@ def __make_scatter_2d(data, target_col, id_col, target, color):
                        )
     return tracer
 
-def pca_2d(df, target_col, id_cols, title=''):
+
+def pca_2d(df: pd.DataFrame, target_col: str, id_cols: str, title='') -> None:
     """
         Usage Example:
             pca_2d(df, target_col, Id_col, title="title")
@@ -148,7 +151,8 @@ def pca_2d(df, target_col, id_cols, title=''):
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def pca_3d(df, target_col, id_cols, title=''):
+
+def pca_3d(df: pd.DataFrame, target_col: str, id_cols: str, title='') -> None:
     """
         Usage Example:
             pca_3d(df, target_col, Id_col, title="title")
@@ -207,7 +211,8 @@ def pca_3d(df, target_col, id_cols, title=''):
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def plot_radar(df, aggregate, target_col, title=''):
+
+def plot_radar(df: pd.DataFrame, aggregate, target_col: str, title='') -> None:
     """
         Usage Example:
             bi_cs = df.nunique()[df.nunique() == 2].keys()
@@ -261,12 +266,13 @@ def plot_radar(df, aggregate, target_col, title=''):
     py.iplot(fig)
 
 
-def corr_sns_heatmap(corr, annot=True, cmap='viridis', vmax=1.0, vmin=-1.0, linewidths=0.1):
+def corr_sns_heatmap(corr: pd.DataFrame, annot=True, cmap='viridis', vmax=1.0, vmin=-1.0, linewidths=0.1) -> None:
     sns.heatmap(corr[(corr >= 0.5) | (corr <= -0.4)], 
                 cmap=cmap, vmax=vmax, vmin=vmin, linewidths=linewidths,
                 annot=annot, annot_kws={"size": 8}, square=True)
 
-def __autolabel(arrayA):
+
+def __autolabel(arrayA) -> None:
     """
         Label each colored square with the corresponding data value. 
         If value > 20, the text is in black, else in white.
@@ -276,7 +282,7 @@ def __autolabel(arrayA):
         for j in range(arrayA.shape[1]):
                 plt.text(j,i, "%.2f"%arrayA[i,j], ha='center', va='bottom',color='w')
 
-def gt_matrix(df, num_cols, sz=16):
+def gt_matrix(df: pd.DataFrame, num_cols, sz=16) -> None:
     a = []
     for i, c1 in enumerate(num_cols):
         b = [] 
@@ -296,7 +302,7 @@ def gt_matrix(df, num_cols, sz=16):
     __autolabel(a)
 
 
-def viz_resids(model_title, X, y, random_state_number=42):
+def viz_resids(model_title: str, X, y, random_state_number=42) -> None:
     """
         Shout out to Mahdi Shadkam-Farrokhi for creating this beautiful visualization function!!
     """
@@ -349,4 +355,3 @@ def viz_resids(model_title, X, y, random_state_number=42):
     ax_3.set_ylabel("Frequency", fontsize = subplot_label_size)
 
     plt.tight_layout() # handles most overlaping and spacing issues
-    
