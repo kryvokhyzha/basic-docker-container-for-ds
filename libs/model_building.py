@@ -17,12 +17,12 @@ def get_prediction(algorithm, X_train, X_test, y_train, y_test, cols, cf, thresh
 
     # coeffs
     if cf == "coefficients":
-        coefficients = pandas.DataFrame(algorithm.coef_.ravel())
+        coefficients = pd.DataFrame(algorithm.coef_.ravel())
     elif cf == "features":
-        coefficients = pandas.DataFrame(algorithm.feature_importances_)
+        coefficients = pd.DataFrame(algorithm.feature_importances_)
         
-    column_df = pandas.DataFrame(cols)
-    coef_sumry = (pandas.merge(coefficients, column_df, left_index=True,
+    column_df = pd.DataFrame(cols)
+    coef_sumry = (pd.merge(coefficients, column_df, left_index=True,
                               right_index=True, how="left"))
     coef_sumry.columns = ["coefficients", "features"]
     coef_sumry = coef_sumry.sort_values(by="coefficients", ascending=False)
@@ -88,6 +88,7 @@ def get_prediction(algorithm, X_train, X_test, y_train, y_test, cols, cf, thresh
         visualizer.fit(X_train, y_train)
         visualizer.poof()
 
+
 def model_report(model, X_train, X_test, y_train, y_test, name) :
     """
         Usage example:
@@ -109,7 +110,7 @@ def model_report(model, X_train, X_test, y_train, y_test, name) :
     f1score = f1_score(y_test, predictions) 
     kappa_metric = cohen_kappa_score(y_test, predictions)
     
-    df = pandas.DataFrame({"Model": [name],
+    df = pd.DataFrame({"Model": [name],
                        "Accuracy_score": [accuracy],
                        "Recall_score": [recallscore],
                        "Precision": [precision],
@@ -118,3 +119,25 @@ def model_report(model, X_train, X_test, y_train, y_test, name) :
                        "Kappa_metric": [kappa_metric],
                       })
     return df
+
+
+def error_metrics(y_true, y_preds, n, k):
+    """
+        1. Take y_true, y_preds, n, k.
+            n is the number of observations.
+            k is the number of independent variables, excluding the constant.
+        2. Return 6 error metrics.
+    """
+    def r2_adj(y_true, y_preds, n, k):
+        rss = np.sum((y_true - y_preds)**2)
+        null_model = np.sum((y_true - np.mean(y_true))**2)
+        r2 = 1 - rss/null_model
+        r2_adj = 1 - ((1-r2)*(n-1))/(n-k-1)
+        return r2_adj
+    
+    print('Mean Square Error: ', mean_squared_error(y_true, y_preds))
+    print('Root Mean Square Error: ', np.sqrt(mean_squared_error(y_true, y_preds)))
+    print('Mean absolute error: ', mean_absolute_error(y_true, y_preds))
+    print('Median absolute error: ', median_absolute_error(y_true, y_preds))
+    print('R^2 score:', r2_score(y_true, y_preds))
+    print('Adjusted R^2 score:', r2_adj(y_true, y_preds, n, k))

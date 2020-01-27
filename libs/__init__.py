@@ -1,5 +1,5 @@
-import numpy
-import pandas
+import numpy as np
+import pandas as pd
 
 import plotly.offline as py
 py.init_notebook_mode(connected=True)
@@ -15,6 +15,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix,accuracy_score,classification_report
 from sklearn.metrics import roc_auc_score,roc_curve,scorer
+from sklearn.metrics import mean_squared_error, mean_absolute_error, median_absolute_error, r2_score, max_error
+
 from sklearn.metrics import f1_score
 import statsmodels.api as sm
 from sklearn.metrics import precision_score,recall_score
