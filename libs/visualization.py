@@ -1,8 +1,8 @@
 from libs import *
 
 
-def scatter_3d(df: pandas.DataFrame, x_col, y_col, z_col,
-                traces, title=''):
+def scatter_3d(df: pd.DataFrame, x_col: str, y_col: str, z_col: str,
+                traces: dict, title='') -> None:
     """
         Usage Example:
             scatter_3d(telcom, 'col1', 'col2', 'col3',
@@ -14,7 +14,7 @@ def scatter_3d(df: pandas.DataFrame, x_col, y_col, z_col,
     # traces = ({'name': '', 'text': '', 'filter': None}, {'name': '', 'text': '', 'filter': None})
     n = len(traces)
     colors = []
-    color = cm.rainbow(numpy.linspace(0, 1, n))
+    color = cm.rainbow(np.linspace(0, 1, n))
     for i, c in zip(range(n), color):
         colors.append(c)
 
@@ -55,7 +55,8 @@ def scatter_3d(df: pandas.DataFrame, x_col, y_col, z_col,
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def corr_heatmap(df, method='pearson', min_periods=1, colorscale="Viridis", abs=False):
+
+def corr_heatmap(df: pd.DataFrame, method='pearson', min_periods=1, colorscale="Viridis", abs=False) -> None:
     """
         Usage Example:
             corr_heatmap(df, abs=True)
@@ -67,10 +68,10 @@ def corr_heatmap(df, method='pearson', min_periods=1, colorscale="Viridis", abs=
     matrix_cols = correlation.columns.tolist()
 
     # conver to array
-    corr_array = numpy.array(correlation)
+    corr_array = np.array(correlation)
 
     if abs:
-        corr_array = numpy.abs(corr_array)
+        corr_array = np.abs(corr_array)
 
     # Plotting
     trace = go.Heatmap(z=corr_array,
@@ -96,7 +97,8 @@ def corr_heatmap(df, method='pearson', min_periods=1, colorscale="Viridis", abs=
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def __make_scatter_2d(data, target_col, id_col, target, color):
+
+def __make_scatter_2d(data: pd.DataFrame, target_col: str, id_col: str, target, color) -> None:
     tracer = go.Scatter(x=data[data[target_col] == target]["PC1"],
                         y=data[data[target_col] == target]["PC2"],
                         name=target,
@@ -108,7 +110,8 @@ def __make_scatter_2d(data, target_col, id_col, target, color):
                        )
     return tracer
 
-def pca_2d(df, target_col, id_cols, title=''):
+
+def pca_2d(df: pd.DataFrame, target_col: str, id_cols: str, title='') -> None:
     """
         Usage Example:
             pca_2d(df, target_col, Id_col, title="title")
@@ -119,7 +122,7 @@ def pca_2d(df, target_col, id_cols, title=''):
     Y = df[[target_col] + [id_cols]]
 
     principal_components = pca.fit_transform(X)
-    pca_data = pandas.DataFrame(principal_components, columns = ["PC1", "PC2"])
+    pca_data = pd.DataFrame(principal_components, columns = ["PC1", "PC2"])
     pca_data = pca_data.merge(Y, left_index=True, right_index=True, how="left")
     pca_data[target_col] = pca_data[target_col].astype(str)
 
@@ -136,19 +139,20 @@ def pca_2d(df, target_col, id_cols, title=''):
                        )
                   )
 
-    n = len(numpy.unique(pca_data[target_col]))
+    n = len(np.unique(pca_data[target_col]))
     colors = []
-    color = cm.rainbow(numpy.linspace(0, 1, n))
+    color = cm.rainbow(np.linspace(0, 1, n))
     for i, c in zip(range(n), color):
         colors.append(c)
 
     data = [__make_scatter_2d(pca_data, target_col, id_cols, target, c[idx])
-            for idx, target in enumerate(numpy.unique(pca_data[target_col]))]
+            for idx, target in enumerate(np.unique(pca_data[target_col]))]
 
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def pca_3d(df, target_col, id_cols, title=''):
+
+def pca_3d(df: pd.DataFrame, target_col: str, id_cols: str, title='') -> None:
     """
         Usage Example:
             pca_3d(df, target_col, Id_col, title="title")
@@ -159,7 +163,7 @@ def pca_3d(df, target_col, id_cols, title=''):
     Y = df[[target_col] + [id_cols]]
 
     principal_components = pca.fit_transform(X)
-    pca_data = pandas.DataFrame(principal_components, columns = ["PC1", "PC2", "PC3"])
+    pca_data = pd.DataFrame(principal_components, columns = ["PC1", "PC2", "PC3"])
     pca_data = pca_data.merge(Y, left_index=True, right_index=True, how="left")
     pca_data[target_col] = pca_data[target_col].astype(str)
 
@@ -189,9 +193,9 @@ def pca_3d(df, target_col, id_cols, title=''):
                        )
                   )
 
-    n = len(numpy.unique(pca_data[target_col]))
+    n = len(np.unique(pca_data[target_col]))
     colors = []
-    color = cm.rainbow(numpy.linspace(0, 1, n))
+    color = cm.rainbow(np.linspace(0, 1, n))
     for i, c in zip(range(n), color):
         colors.append(c)
 
@@ -202,12 +206,13 @@ def pca_3d(df, target_col, id_cols, title=''):
                     text=("Id: " + pca_data[pca_data[target_col] == x][id_cols]),
                     mode="markers",
                     marker=dict(size=1,color=c[idx])
-                    ) for idx, x in enumerate(numpy.unique(pca_data[target_col]))]
+                    ) for idx, x in enumerate(np.unique(pca_data[target_col]))]
 
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig)
 
-def plot_radar(df, aggregate, target_col, title=''):
+
+def plot_radar(df: pd.DataFrame, aggregate, target_col: str, title='') -> None:
     """
         Usage Example:
             bi_cs = df.nunique()[df.nunique() == 2].keys()
@@ -261,22 +266,23 @@ def plot_radar(df, aggregate, target_col, title=''):
     py.iplot(fig)
 
 
-def corr_sns_heatmap(corr, annot=True, cmap='viridis', vmax=1.0, vmin=-1.0, linewidths=0.1):
+def corr_sns_heatmap(corr: pd.DataFrame, annot=True, cmap='viridis', vmax=1.0, vmin=-1.0, linewidths=0.1) -> None:
     sns.heatmap(corr[(corr >= 0.5) | (corr <= -0.4)], 
                 cmap=cmap, vmax=vmax, vmin=vmin, linewidths=linewidths,
                 annot=annot, annot_kws={"size": 8}, square=True)
 
-def __autolabel(arrayA):
+
+def __autolabel(arrayA) -> None:
     """
         Label each colored square with the corresponding data value. 
         If value > 20, the text is in black, else in white.
     """
-    arrayA = numpy.array(arrayA)
+    arrayA = np.array(arrayA)
     for i in range(arrayA.shape[0]):
         for j in range(arrayA.shape[1]):
                 plt.text(j,i, "%.2f"%arrayA[i,j], ha='center', va='bottom',color='w')
 
-def gt_matrix(df, num_cols, sz=16):
+def gt_matrix(df: pd.DataFrame, num_cols, sz=16) -> None:
     a = []
     for i, c1 in enumerate(num_cols):
         b = [] 
@@ -294,3 +300,58 @@ def gt_matrix(df, num_cols, sz=16):
     _ = plt.xticks(range(len(num_cols)),num_cols,rotation = 90)
     _ = plt.yticks(range(len(num_cols)),num_cols,rotation = 0)
     __autolabel(a)
+
+
+def viz_resids(model_title: str, X, y, random_state_number=42) -> None:
+    """
+        Shout out to Mahdi Shadkam-Farrokhi for creating this beautiful visualization function!!
+    """
+
+    # HANDLING DATA
+    # train/test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=random_state_number)
+
+    # instatiate model
+    lr = LinearRegression()
+    # fit model
+    lr.fit(X_train, y_train)
+
+    preds = lr.predict(X_test)
+    resids = y_test - preds
+    target_name = y.name.capitalize()
+
+    # HANDLING SUBPLOTS
+    fig, axes = plt.subplots(2, 2, figsize=(12,10)) # 2 row x 2 columns
+    fig.suptitle(f"{model_title}: $R^2$ test ={lr.score(X_test, y_test):2.2%}", fontsize = 24, y = 1.05)
+
+    ax_1 = axes[0][0]
+    ax_2 = axes[0][1]
+    ax_3 = axes[1][0]
+
+    subplot_title_size = 18
+    subplot_label_size = 14
+    
+    # 1ST PLOT - y_true vs. y_pred
+    ax_1.set_title("True Values ($y$) vs. Predictions ($\hat{y}$)", fontsize = subplot_title_size, pad = 10)
+    maxDist = max(max(preds),max(y)) # maxiumum value used to determin x_lim and y_lim
+    minDist = min(min(preds),min(y)) # maxiumum value used to determin x_lim and y_lim
+    # 45deg line, signifying prediction == true value
+    ax_1.plot((minDist,maxDist),(minDist,maxDist), c = "r", alpha = .7);
+    
+    sns.scatterplot(ax = ax_1, x = y_test, y = preds, alpha = .5)
+    ax_1.set_xlabel("True Values ($y$)", fontsize = subplot_label_size, labelpad = 10)
+    ax_1.set_ylabel("Predictions ($\hat{y}$)", fontsize = subplot_label_size, labelpad = 10)
+
+    # 2ND PLOT - residuals
+    ax_2.set_title("Residuals", fontsize = subplot_title_size)
+    sns.scatterplot(ax = ax_2, x = range(len(resids)),y = resids, alpha = .5)
+    ax_2.set_ylabel(target_name, fontsize = subplot_label_size)
+    ax_2.axhline(0, c = "r", alpha = .7);
+
+    # 3RD PLOT - residuals histogram
+    ax_3.set_title("Histogram of residuals", fontsize = subplot_title_size)
+    sns.distplot(resids, ax = ax_3, kde = False);
+    ax_3.set_xlabel(target_name, fontsize = subplot_label_size)
+    ax_3.set_ylabel("Frequency", fontsize = subplot_label_size)
+
+    plt.tight_layout() # handles most overlaping and spacing issues
