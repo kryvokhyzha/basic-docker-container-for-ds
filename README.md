@@ -74,7 +74,7 @@ volumes:
 3.  Delete whole _db_ section 
 
 Now, _docker-compose.yml_ looks like:
-```
+```yaml
 version: '3'
 services: 
     jupyter:
