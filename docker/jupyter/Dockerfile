@@ -1,4 +1,4 @@
-FROM jupyter/pyspark-notebook:latest
+FROM jupyter/pyspark-notebook:414b5d749704
 
 COPY requirements.txt requirements.txt
 
