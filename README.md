@@ -40,9 +40,7 @@ docker-compose up --build
 ```
 
 5.  Copy a jupyter url from terminal and open it in your browser
-
 6.  Create your notebook in _notebooks_ folder
-
 7.  Copy your data into ./data and read it in Jupyter. You also can upload data into PostgresSQL, which is running in it's own container along with Jupyter
 8.  Close terminal to stop running jupyter and postgres
 9.  Stop containers and removes containers, networks, volumes, and images:
