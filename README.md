@@ -88,8 +88,8 @@ services:
             - JUPYTER_ENABLE_LAB=yes
 ```
 
-5.  Delete _./docker/postgres/_ folder
-4.  Run project (see previous paragraph)
+4.  Delete _./docker/postgres/_ folder
+5.  Run project (see previous paragraph)
 
 ## Usefull commnads
 
