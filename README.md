@@ -11,8 +11,8 @@ This is template for creating Data Science project.
 Create a new folder with project name, cd into it, and then run:
 
 ```bash
-$ git init
-$ git pull https://github.com/kryvokhyzha/basic-docker-container-for-ds.git
+git init
+git pull https://github.com/kryvokhyzha/basic-docker-container-for-ds.git
 ```
 
 2.  Add your favorite Python modules to _./docker/jupyter/requirements.txt_
@@ -31,11 +31,11 @@ torch==1.3
 4.  Run containers:
 
 ```bash
-$ docker-compose up
+docker-compose up
 ```
 or
 ```bash
-$ docker-compose up --build
+docker-compose up --build
 ```
 
 5.  Copy a jupyter url from terminal and open it in your browser
@@ -45,19 +45,19 @@ $ docker-compose up --build
 9.  Stop containers and removes containers, networks, volumes, and images:
 
 ```bash
-$ docker-compose down
+docker-compose down
 ```
 
 10. Clean Docker's mess:
 
 ```bash
-$ docker rmi -f $(docker images -qf dangling=true)
+docker rmi -f $(docker images -qf dangling=true)
 ```
 
 Sometimes it is useful to remove all docker's data:
 
 ```bash
-$ docker system prune
+docker system prune
 ```
 
 ## Disable PostgreSQL server
@@ -95,59 +95,59 @@ services:
 
 ### Show running containers
 ```bash
-$ docker ps
+docker ps
 ```
 
 ### Show all containers
 ```bash
-$ docker ps --all
+docker ps --all
 ```
 
 ### Show all top level images
 ```bash
-$ docker images
+docker images
 ```
 
 ### Build container
 ```bash
-$ docker -t build <tag-name> .
+docker -t build <tag-name> .
 ```
 _this command works, when Dockerfile is placed in current directory_
 
 ### Run container with volume
 ```bash
-$ docker run --rm -p <local-port>:<docker-port> -e JUPYTER_ENABLE_LAB=yes -v "$PWD":/home/jovyan/ <tag-name>
+docker run --rm -p <local-port>:<docker-port> -e JUPYTER_ENABLE_LAB=yes -v "$PWD":/home/jovyan/ <tag-name>
 ```
 _PWD_ - prints the path of the working directory, starting from the root
 
 ### Create volume for postgresql
 ```bash
-$ docker volume create pgdata
+docker volume create pgdata
 ```
 
 _pgdata_ - is volume name for postgresql
 
 ### Docker compose up
 ```bash
-$ docker-compose up
+docker-compose up
 ```
 
 ### Docker compose up with build
 ```bash
-$ docker-compose up --build
+docker-compose up --build
 ```
 
 ### Docker compose down
 ```bash
-$ docker-compose down
+docker-compose down
 ```
 
 ### Attach to running container
 ```bash
-$ docker exec -it <mycontainerID> bash
+docker exec -it <mycontainerID> bash
 ```
 
 ### Copy file into the running container
 ```bash
-$ docker cp <data-filename> <mycontainerID>:/home/jovyan/<data-filename>
+docker cp <data-filename> <mycontainerID>:/home/jovyan/<data-filename>
 ```
