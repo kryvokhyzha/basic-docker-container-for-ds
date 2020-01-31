@@ -15,14 +15,15 @@ git init
 git pull https://github.com/kryvokhyzha/basic-docker-container-for-ds.git
 ```
 
-2.  Add your favorite Python modules to ./docker/jupyter/requirements.txt. For example:
+2.  Add your favorite Python modules to _./docker/jupyter/requirements.txt_
+For example:
 
 ```bash
 statsmodels
 torch==1.3
 ```
 
-3.  Change image name in docker-compose file:
+3.  Change image name in _docker-compose_ file:
 ```bash
 ...
     image: docker_user/app_name:tag
@@ -41,7 +42,7 @@ docker-compose up --build
 
 5.  Copy a jupyter url from terminal and open it in your browser
 6.  Create your notebook in _notebooks_ folder
-7.  Copy your data into ./data and read it in Jupyter. You also can upload data into PostgresSQL, which is running in it's own container along with Jupyter
+7.  Copy your data into _./data_ and read it in Jupyter. You also can upload data into PostgresSQL, which is running in it's own container along with Jupyter
 8.  Close terminal to stop running jupyter and postgres
 9.  Stop containers and removes containers, networks, volumes, and images:
 
@@ -64,8 +65,13 @@ docker system prune
 ## Disable PostgreSQL server
 1.  Go to the file _docker-complose.yml_
 2.  Delete _volumes_ section under _db_
+
+```bash
+volumes: 
+    pgdata:
+```
+
 3.  Delete whole _db_ section 
-4.  Run project (see previous paragraph)
 
 Now, _docker-compose.yml_ looks like:
 ```
@@ -75,6 +81,7 @@ services:
         build: 
             context: ./docker/jupyter/
             dockerfile: Dockerfile
+        docker_user/app_name:tag
         volumes: 
             - .:/home/jovyan/
         ports: 
@@ -82,6 +89,9 @@ services:
         environment: 
             - JUPYTER_ENABLE_LAB=yes
 ```
+
+5.  Delete _./docker/postgres/_ folder
+4.  Run project (see previous paragraph)
 
 ## Usefull commnads
 
