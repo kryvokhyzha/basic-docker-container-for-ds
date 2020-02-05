@@ -5,9 +5,7 @@ LABEL maintainer="Jupyter Project"
 USER $NB_UID
 
 # Apache Toree kernel
-RUN pip install --no-cache-dir \
-    https://dist.apache.org/repos/dist/release/incubator/toree/0.3.0-incubating/toree-pip/toree-0.3.0.tar.gz \
-    && \
+RUN pip install toree==0.3.0 && \
     jupyter toree install --sys-prefix && \
     rm -rf /home/"$NB_USER"/.local && \
     fix-permissions "$CONDA_DIR" && \
