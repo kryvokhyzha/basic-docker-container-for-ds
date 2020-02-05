@@ -1,14 +1,12 @@
-ARG BASE_CONTAINER=jupyter/pyspark-notebook:414b5d749704
-FROM $BASE_CONTAINER
+FROM jupyter/pyspark-notebook:414b5d749704
 
 LABEL maintainer="Jupyter Project"
 
 USER $NB_UID
 
 # Apache Toree kernel
-RUN pip install --no-cache-dir \
-    https://dist.apache.org/repos/dist/release/incubator/toree/0.3.0-incubating/toree-pip/toree-0.3.0.tar.gz \
-    && \
+RUN pip install https://dist.apache.org/repos/dist/release/incubator/toree/0.3.0-incubating/toree-pip/toree-0.3.0.tar.gz \
+    --no-cache-dir && \
     jupyter toree install --sys-prefix && \
     rm -rf /home/"$NB_USER"/.local && \
     fix-permissions "$CONDA_DIR" && \
